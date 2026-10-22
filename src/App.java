@@ -7,26 +7,23 @@ public class App {
     private static Random r = new Random();
 
     public static void main(String[] args) throws Exception {
-        
-        ejercicioLaCifraExacta();
+
+        EjercicioCalculadoraHumana();
     }
 
-    
     public static void ejercicioLaCifraExacta() {
         System.out.println("PRUEBA 3.1 LA CIFRA EXACTA");
-        
+
         System.out.println("TURNO DEL JUGADOR 1");
         double diferenciaJugador1 = jugarPartidaCifras();
 
         System.out.println("TURNO DEL JUGADOR 2");
         double diferenciaJugador2 = jugarPartidaCifras();
 
-        
         System.out.println("          RESULTADOS FINALES           ");
         System.out.println("Diferencia Jugador 1: " + diferenciaJugador1);
         System.out.println("Diferencia Jugador 2: " + diferenciaJugador2);
 
-        
         if (diferenciaJugador1 < diferenciaJugador2) {
             System.out.println("Ha ganado el Jugador 1 por estar mas cerca del objetivo!");
         } else if (diferenciaJugador2 < diferenciaJugador1) {
@@ -36,15 +33,13 @@ public class App {
         }
     }
 
-    
     public static double jugarPartidaCifras() {
-        
+
         int objetivo = r.nextInt(900) + 100;
 
         System.out.println("Numero objetivo: " + objetivo);
         System.out.print("Numeros auxiliares: ");
-        
-        
+
         for (int i = 0; i < 6; i++) {
             int aux = r.nextInt(10) + 1;
             System.out.print(aux + " ");
@@ -53,18 +48,17 @@ public class App {
 
         System.out.print("Introduce tu numero inicial: ");
         double total = sc.nextDouble();
-        sc.nextLine(); 
+        sc.nextLine();
 
-        
         for (int paso = 1; paso <= 5; paso++) {
             System.out.println("--- Operacion " + paso + " de 5 (Llevas: " + total + ") ---");
-            
+
             System.out.print("Elige operacion (+, -, *, /): ");
             String seleccionOperacion = sc.nextLine();
 
             System.out.print("Introduce el siguiente numero: ");
             double siguienteNum = sc.nextDouble();
-            sc.nextLine(); 
+            sc.nextLine();
 
             if (seleccionOperacion.equals("+")) {
                 total += siguienteNum;
@@ -75,7 +69,7 @@ public class App {
             } else if (seleccionOperacion.equals("/")) {
                 if (siguienteNum == 0) {
                     System.out.println("Error. No se puede dividir entre cero. Repite.");
-                    paso--; 
+                    paso--;
                     continue;
                 }
                 total /= siguienteNum;
@@ -84,16 +78,56 @@ public class App {
                 paso--;
                 continue;
             }
-            
+
             System.out.println("Resultado: " + total);
         }
 
-        
         double diferencia = Math.abs(objetivo - total);
         System.out.println("------------------------------");
         System.out.println("Diferencia: " + diferencia);
 
-        
         return diferencia;
     }
+
+    public static void EjercicioCalculadoraHumana() {
+
+        Random r = new Random();
+
+        int numeroInicial = r.nextInt(100);
+
+
+        System.out.println("tu numero inicial es: " + numeroInicial);
+
+
+        
+
+        String operacionAritmetica1 = "+";
+        String operacionAritmetica2 = "-";
+        String operacionAritmetica3 = "*";
+        String operacionAritmetica4 = "/";
+
+        if (operacionAritmetica1.equals("+")) {
+
+            String resultado = String.format("%.2f", operacionAritmetica1);
+            System.out.println(resultado);
+
+        } else if (operacionAritmetica2.equals("-")) {
+
+            String resultado = String.format("%.2f", operacionAritmetica2);
+            System.out.println(resultado);
+
+        } else if (operacionAritmetica3.equals("*")) {
+
+            String resultado = String.format("%.1f", operacionAritmetica3);
+            System.out.println(resultado);
+
+        } else if (operacionAritmetica4.equals("/")) {
+
+            String resultado = String.format("%.1f", operacionAritmetica4);
+            System.out.println(resultado);
+
+        }
+
+    }
+
 }
