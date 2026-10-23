@@ -14,27 +14,31 @@ public class App {
         String letrasRandom = letras();
         int puntoJugador1 = 0;
         int puntoJugador2 = 0;
+        boolean esValido = true;
         String palabraJugador1;
         String palabraJugador2;
-        for (int i = 0; i < 2; i++) {
+
+        for (int i = 0; i < 1; i++) {
             System.out.println("Jugador1, forma una palabra con las siguientes letras:");
             System.out.println(letras());
             do {
-                palabraJugador1 = sc.nextLine();  
-                if (esValido(palabraJugador1)==false) {
+                palabraJugador1 = sc.nextLine();
+                esValido = esValido(palabraJugador1);
+                if (esValido==false) {
                     System.out.println("Introduce una palabra valida.");
-                }
-            } while (esValido(palabraJugador1));
+                }  
+            } while (esValido==false);
             System.out.println("¡Palabra valida!");
 
             System.out.println("Jugador2, forma una palabra con las siguientes letras:");
             System.out.println(letras());
            do {
-                palabraJugador2 = sc.nextLine();  
-                if (esValido(palabraJugador2)==false) {
+                palabraJugador2 = sc.nextLine();
+                esValido = esValido(palabraJugador2);
+                if (esValido==false) {
                     System.out.println("Introduce una palabra valida.");
-                }
-            } while (esValido(palabraJugador2));
+                }  
+            } while (esValido==false);
             System.out.println("¡Palabra valida!");
             
             System.out.println("Longitud de las palabras:");
@@ -72,15 +76,26 @@ public class App {
     }
 
     public static boolean esValido(String palabraJugador){
-        boolean esValido;
+        boolean esValido = true;
         String palabraValida;
         do {
             System.out.println("¿Es valida? s/n");
             palabraValida = sc.nextLine();
-        } while (palabraValida!="s" || palabraValida!="n");
-        if (palabraValida=="s") {
+            if (palabraValida.equalsIgnoreCase("S")) {
             esValido = true;
-        } else {esValido=false;}
+            }   else if (palabraValida.equalsIgnoreCase("n")) {esValido=false;}
+        } while (palabraValida.equalsIgnoreCase("s") && palabraValida.equalsIgnoreCase("n") );
+        
         return esValido;
+    }
+
+    public static boolean puedeFormarse(String palabraJugador, String letras){
+        boolean puedeFormarse = true;
+        String letrasEstan;
+        for (int i = 0; i < palabraJugador.length(); i++) {
+            letras.replaceFirst(letras, String.valueOf(palabraJugador.charAt(i)));
+            Sys
+        }
+        return puedeFormarse;
     }
 }
