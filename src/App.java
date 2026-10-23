@@ -93,41 +93,88 @@ public class App {
 
         Random r = new Random();
 
-        int numeroInicial = r.nextInt(100);
+        int numeroInicial1 = r.nextInt(99);
+        int numeroInicial2 = r.nextInt(99);
 
-
-        System.out.println("tu numero inicial es: " + numeroInicial);
-
-
-        
+        int minimo = 0;
+        int maximo = 0;
 
         String operacionAritmetica1 = "+";
         String operacionAritmetica2 = "-";
         String operacionAritmetica3 = "*";
         String operacionAritmetica4 = "/";
 
-        if (operacionAritmetica1.equals("+")) {
+        int seleccionOperacion = r.nextInt(4);
 
-            String resultado = String.format("%.2f", operacionAritmetica1);
-            System.out.println(resultado);
+        String switchOperacion;
 
-        } else if (operacionAritmetica2.equals("-")) {
+        if (seleccionOperacion == 1) {
 
-            String resultado = String.format("%.2f", operacionAritmetica2);
-            System.out.println(resultado);
+            minimo = 1;
+            maximo = 99;
 
-        } else if (operacionAritmetica3.equals("*")) {
+        } else if (seleccionOperacion == 2) {
 
-            String resultado = String.format("%.1f", operacionAritmetica3);
-            System.out.println(resultado);
+            minimo = 1;
+            maximo = 99;
+            
+        } else if (seleccionOperacion == 3) {
 
-        } else if (operacionAritmetica4.equals("/")) {
+            minimo = 1;
+            maximo = 9;
 
-            String resultado = String.format("%.1f", operacionAritmetica4);
-            System.out.println(resultado);
+        } else if (seleccionOperacion == 4) {
 
+            minimo = 1;
+            maximo = 9;
+
+        }
+
+        switch (seleccionOperacion) {
+            case 1:
+                System.out.println(numeroInicial1 + "+" + numeroInicial2);
+                break;
+
+            case 2:
+                System.out.println(numeroInicial1 + "-" + numeroInicial2);
+                break;
+
+            case 3:
+                System.out.println(numeroInicial1 + "*" + numeroInicial2);
+                break;
+
+            case 4:
+                System.out.println(numeroInicial1 + "/" + numeroInicial2);
+                break;
+
+            default:
+                break;
         }
 
     }
 
 }
+
+/*
+ * if (operacionAritmetica1.equals("+")) {
+ * 
+ * String resultado = String.format("%.2f", operacionAritmetica1);
+ * System.out.println(resultado);
+ * 
+ * } else if (operacionAritmetica2.equals("-")) {
+ * 
+ * String resultado = String.format("%.2f", operacionAritmetica2);
+ * System.out.println(resultado);
+ * 
+ * } else if (operacionAritmetica3.equals("*")) {
+ * 
+ * String resultado = String.format("%.1f", operacionAritmetica3);
+ * System.out.println(resultado);
+ * 
+ * } else if (operacionAritmetica4.equals("/")) {
+ * 
+ * String resultado = String.format("%.1f", operacionAritmetica4);
+ * System.out.println(resultado);
+ * 
+ * }
+ */
