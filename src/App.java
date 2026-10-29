@@ -217,7 +217,7 @@ Minijuego
        for (int i = 0; i < numRondas; i++) {
             System.out.println("Jugador1 introduce una cadena de texto:");
             do {
-                System.out.println("Máximo 7 caracteres");
+                System.out.println("Máximo 7 caracteres | No letras acentuadas");
                 palabraJugador1 = sc.nextLine();
             } while (palabraJugador1.length() > 7  || palabraJugador1.length() <= 0);
             
@@ -243,7 +243,7 @@ Minijuego
 
             System.out.println("Jugador2 introduce una cadena de texto:");
             do {
-                System.out.println("Máximo 7 caracteres");
+                System.out.println("Máximo 7 caracteres | No letras acentuadas");
                 palabraJugador2 = sc.nextLine();
             } while (palabraJugador2.length()>7 || palabraJugador2.length() <= 0);
             
@@ -264,7 +264,7 @@ Minijuego
                 descifrar = sc.nextLine();
             } while (!descifrar.equalsIgnoreCase(palabraJugador2));
             fin = Instant.now();
-            duracion =  Duration.between(inicio, fin);
+            duracion =  Duration.between(inicio, fin); 
             int duracionJugador1 = Math.toIntExact(duracion.toSeconds());
 
             System.out.println("---Duraciones de los jugadores---");
