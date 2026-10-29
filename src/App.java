@@ -13,9 +13,6 @@ public class App {
     static int cantidadLetras=2;
     static int cantidadOperaciones = 4;
 
-    private static Scanner sc = new Scanner(System.in);
-    private static Random r = new Random();
-
     public static void main(String[] args) throws Exception {
         do {
             System.out.println("--------------------");
@@ -32,7 +29,11 @@ public class App {
                     System.out.println("---------------------------------");
                     System.out.println("---BIENVENIDO AL MODO CONCURSO---");
                     System.out.println("---------------------------------");
+                    ejercicioLaCifraExacta();
+                    puntuacionGlobal();
                     LaPalabraMasLarga();
+                    puntuacionGlobal();
+                    EjercicioCalculadoraHumana();
                     puntuacionGlobal();
                     cifradoCesar();
                     puntuacionGlobal();
@@ -55,13 +56,13 @@ public class App {
                     
                         switch (selector) {
                         case 1:
-                            
+                            ejercicioLaCifraExacta();
                             break;
                         case 2:
                             LaPalabraMasLarga();
                             break;
                         case 3:
-                            
+                            EjercicioCalculadoraHumana();
                             break;
                         case 4:
                             cifradoCesar();
@@ -103,8 +104,10 @@ public class App {
         System.out.println("Diferencia Jugador 2: " + diferenciaJugador2);
 
         if (diferenciaJugador1 < diferenciaJugador2) {
+            pruebaJ1++;
             System.out.println("Ha ganado el Jugador 1 por estar mas cerca del objetivo!");
         } else if (diferenciaJugador2 < diferenciaJugador1) {
+            pruebaJ2++;
             System.out.println("Ha ganado el Jugador 2 por estar mas cerca del objetivo!");
         } else {
             System.out.println("Empate. Los dos jugadores obtuvieron la misma diferencia.");
