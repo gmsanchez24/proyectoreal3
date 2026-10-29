@@ -8,7 +8,7 @@ public class App {
 
     public static void main(String[] args) throws Exception {
 
-        EjercicioCalculadoraHumana();
+        
     }
 
     public static void ejercicioLaCifraExacta() {
@@ -20,7 +20,7 @@ public class App {
         System.out.println("TURNO DEL JUGADOR 2");
         double diferenciaJugador2 = jugarPartidaCifras();
 
-        System.out.println("          RESULTADOS FINALES           ");
+        System.out.println("RESULTADOS FINALES");
         System.out.println("Diferencia Jugador 1: " + diferenciaJugador1);
         System.out.println("Diferencia Jugador 2: " + diferenciaJugador2);
 
@@ -29,7 +29,7 @@ public class App {
         } else if (diferenciaJugador2 < diferenciaJugador1) {
             System.out.println("Ha ganado el Jugador 2 por estar mas cerca del objetivo!");
         } else {
-            System.out.println("Empate. Ambos jugadores obtuvieron la misma diferencia.");
+            System.out.println("Empate. Los dos jugadores obtuvieron la misma diferencia.");
         }
     }
 
@@ -91,90 +91,137 @@ public class App {
 
     public static void EjercicioCalculadoraHumana() {
 
-        Random r = new Random();
+        int cantidadOperaciones = 5;
 
-        int numeroInicial1 = r.nextInt(99);
-        int numeroInicial2 = r.nextInt(99);
+        System.out.println("PRUEBA 3.3 LA CALCULADORA HUMANA");
 
-        int minimo = 0;
-        int maximo = 0;
+        System.out.println("TURNO DEL JUGADOR 1");
+        double tiempoJugador1 = jugarCalculadoraHumana(cantidadOperaciones);
+
+        System.out.println("TURNO DEL JUGADOR 2");
+        double tiempoJugador2 = jugarCalculadoraHumana(cantidadOperaciones);
+
+        System.out.println("RESULTADOS FINALES");
+        System.out.println("Tiempo final Jugador 1: " + tiempoJugador1 + " s");
+        System.out.println("Tiempo final Jugador 2: " + tiempoJugador2 + " s");
+
+        if (tiempoJugador1 < tiempoJugador2) {
+            System.out.println("Ha ganado el Jugador 1 por ser mas rapido!");
+        } else if (tiempoJugador2 < tiempoJugador1) {
+            System.out.println("Ha ganado el Jugador 2 por ser mas rapido!");
+        } else {
+            System.out.println("Empate. Ambos jugadores obtuvieron el mismo tiempo.");
+        }
+    }
+
+    public static double jugarCalculadoraHumana(int cantidadOperaciones) {
+
+        int numeroInicial1 = r.nextInt(100) + 1;
+        int fallos = 0;
 
         String operacionAritmetica1 = "+";
         String operacionAritmetica2 = "-";
         String operacionAritmetica3 = "*";
         String operacionAritmetica4 = "/";
 
-        int seleccionOperacion = r.nextInt(4);
+        System.out.print("Pulsa ENTER para empezar: ");
+        sc.nextLine();
 
-        String switchOperacion;
+        long inicio = System.currentTimeMillis();
 
-        if (seleccionOperacion == 1) {
+        for (int i = 1; i <= cantidadOperaciones; i++) {
 
-            minimo = 1;
-            maximo = 99;
+            int minimo = 0;
+            int maximo = 0;
 
-        } else if (seleccionOperacion == 2) {
+            int seleccionOperacion = r.nextInt(4);
 
-            minimo = 1;
-            maximo = 99;
-            
-        } else if (seleccionOperacion == 3) {
+            if (seleccionOperacion == 3) {
+                boolean tieneDivisor = false;
+                for (int d = 2; d <= 9; d++) {
+                    if (numeroInicial1 % d == 0) {
+                        tieneDivisor = true;
+                    }
+                }
+                if (!tieneDivisor) {
+                    seleccionOperacion = r.nextInt(3);
+                }
+            }
 
-            minimo = 1;
-            maximo = 9;
+            if (seleccionOperacion == 0 || seleccionOperacion == 1) {
+                minimo = 10;
+                maximo = 99;
+            } else if (seleccionOperacion == 2) {
+                minimo = 1;
+                maximo = 9;
+            } else {
+                minimo = 2;
+                maximo = 9;
+            }
 
-        } else if (seleccionOperacion == 4) {
+            int numeroInicial2 = r.nextInt(maximo - minimo + 1) + minimo;
 
-            minimo = 1;
-            maximo = 9;
+            if (seleccionOperacion == 3) {
+                while (numeroInicial1 % numeroInicial2 != 0) {
+                    numeroInicial2 = r.nextInt(maximo - minimo + 1) + minimo;
+                }
+            }
 
+            int resultadoCorrecto = 0;
+
+            System.out.println("--- Operacion " + i + " de " + cantidadOperaciones + " ---");
+
+            switch (seleccionOperacion) {
+                case 0:
+                    System.out.print(numeroInicial1 + " " + operacionAritmetica1 + " " + numeroInicial2 + " = ");
+                    resultadoCorrecto = numeroInicial1 + numeroInicial2;
+                    break;
+
+                case 1:
+                    System.out.print(numeroInicial1 + " " + operacionAritmetica2 + " " + numeroInicial2 + " = ");
+                    resultadoCorrecto = numeroInicial1 - numeroInicial2;
+                    break;
+
+                case 2:
+                    System.out.print(numeroInicial1 + " " + operacionAritmetica3 + " " + numeroInicial2 + " = ");
+                    resultadoCorrecto = numeroInicial1 * numeroInicial2;
+                    break;
+
+                case 3:
+                    System.out.print(numeroInicial1 + " " + operacionAritmetica4 + " " + numeroInicial2 + " = ");
+                    resultadoCorrecto = numeroInicial1 / numeroInicial2;
+                    break;
+
+                default:
+                    break;
+            }
+
+            while (!sc.hasNextInt()) {
+                sc.nextLine();
+                System.out.print("No es valido. Introduce un numero entero porfavor: ");
+            }
+            int respuesta = sc.nextInt();
+            sc.nextLine();
+
+            if (respuesta == resultadoCorrecto) {
+                System.out.println("Correcto!");
+            } else {
+                fallos++;
+                System.out.println(
+                        "Es erroneo. El resultado correcto era: " + resultadoCorrecto + " (+20 s de penalizacion)");
+            }
+
+            numeroInicial1 = resultadoCorrecto;
         }
 
-        switch (seleccionOperacion) {
-            case 1:
-                System.out.println(numeroInicial1 + "+" + numeroInicial2);
-                break;
+        long fin = System.currentTimeMillis();
 
-            case 2:
-                System.out.println(numeroInicial1 + "-" + numeroInicial2);
-                break;
+        double tiempoFinal = (fin - inicio) / 1000.0 + fallos * 20;
 
-            case 3:
-                System.out.println(numeroInicial1 + "*" + numeroInicial2);
-                break;
+        System.out.println("Fallos: " + fallos + " | Tiempo final: " + tiempoFinal + " decimas");
+        System.out.println("------------------------------");
 
-            case 4:
-                System.out.println(numeroInicial1 + "/" + numeroInicial2);
-                break;
-
-            default:
-                break;
-        }
-
+        return tiempoFinal;
     }
 
 }
-
-/*
- * if (operacionAritmetica1.equals("+")) {
- * 
- * String resultado = String.format("%.2f", operacionAritmetica1);
- * System.out.println(resultado);
- * 
- * } else if (operacionAritmetica2.equals("-")) {
- * 
- * String resultado = String.format("%.2f", operacionAritmetica2);
- * System.out.println(resultado);
- * 
- * } else if (operacionAritmetica3.equals("*")) {
- * 
- * String resultado = String.format("%.1f", operacionAritmetica3);
- * System.out.println(resultado);
- * 
- * } else if (operacionAritmetica4.equals("/")) {
- * 
- * String resultado = String.format("%.1f", operacionAritmetica4);
- * System.out.println(resultado);
- * 
- * }
- */
