@@ -120,9 +120,10 @@ public class App {
 
         System.out.println("Numero objetivo: " + objetivo);
         System.out.print("Numeros auxiliares: ");
+        int aux = r.nextInt(10) + 1;
 
         for (int i = 0; i < 6; i++) {
-            int aux = r.nextInt(10) + 1;
+            aux = r.nextInt(10) + 1;
             System.out.print(aux + " ");
         }
         System.out.println("\n------------------------------");
@@ -130,6 +131,11 @@ public class App {
         System.out.print("Introduce tu numero inicial: ");
         double total = sc.nextDouble();
         sc.nextLine();
+
+        
+        if (total != aux) {
+            System.out.println("El numero debe de ser de la lista auxiliar.");
+        }
 
         for (int paso = 1; paso <= 5; paso++) {
             System.out.println("--- Operacion " + paso + " de 5 (Llevas: " + total + ") ---");
@@ -417,10 +423,12 @@ Función para generar letras aleatorias acorde a lo indicado
 
         long fin = System.currentTimeMillis();
 
-        double tiempoFinal = (fin - inicio) / 1000.0 + fallos * 20;
+        double tiempoFinal = (fin - inicio) / 1000.0 + fallos * 20000;
 
-        System.out.println("Fallos: " + fallos + " | Tiempo final: " + tiempoFinal + " decimas");
+        System.out.println("Fallos: " + fallos + " | Tiempo final: " + tiempoFinal + " segundos");
         System.out.println("------------------------------");
+
+
 
         return tiempoFinal;
     }
