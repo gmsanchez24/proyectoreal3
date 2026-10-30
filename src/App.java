@@ -8,6 +8,7 @@ public class App {
 
     public static void main(String[] args) throws Exception {
 
+        ejercicioLaCifraExacta();
         
     }
 
@@ -85,6 +86,7 @@ public class App {
         double diferencia = Math.abs(objetivo - total);
         System.out.println("------------------------------");
         System.out.println("Diferencia: " + diferencia);
+
 
         return diferencia;
     }
@@ -218,7 +220,7 @@ public class App {
 
         double tiempoFinal = (fin - inicio) / 1000.0 + fallos * 20;
 
-        System.out.println("Fallos: " + fallos + " | Tiempo final: " + tiempoFinal + " decimas");
+        System.out.println("Fallos: " + fallos + " | Tiempo final: " + tiempoFinal + "segundos");
         System.out.println("------------------------------");
 
         return tiempoFinal;
