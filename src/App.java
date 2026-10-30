@@ -26,56 +26,10 @@ public class App {
             sc.nextLine();
             switch (selector) {
                 case 1:
-                    System.out.println("---------------------------------");
-                    System.out.println("---BIENVENIDO AL MODO CONCURSO---");
-                    System.out.println("---------------------------------");
-                    ejercicioLaCifraExacta();
-                    puntuacionGlobal();
-                    LaPalabraMasLarga();
-                    puntuacionGlobal();
-                    EjercicioCalculadoraHumana();
-                    puntuacionGlobal();
-                    cifradoCesar();
-                    puntuacionGlobal();
-                    ganadorFinal();
+                    modoConcurso();
                     break;
-
                 case 2:
-                    do {
-                        System.out.println("-------------------------------");
-                        System.out.println("---BIENVENIDO AL MODO RAPIDO---");
-                        System.out.println("-------------------------------");
-                        System.out.println("Selecciona la prueba que deas jugar");
-                        System.out.println("1. La Cifra Exacta");
-                        System.out.println("2. La Palabra Más Larga");
-                        System.out.println("3. La Calculadora Humana");
-                        System.out.println("4. Cifrado Cesar");
-                        System.out.println("5. SALIR");
-                        selector = sc.nextInt();
-                        sc.nextLine();
-                    
-                        switch (selector) {
-                        case 1:
-                            ejercicioLaCifraExacta();
-                            break;
-                        case 2:
-                            LaPalabraMasLarga();
-                            break;
-                        case 3:
-                            EjercicioCalculadoraHumana();
-                            break;
-                        case 4:
-                            cifradoCesar();
-                            break;
-                        case 5:
-                            System.out.println("SALIENDO DEL MODO RÁPIDO...");
-                            break;
-                    
-                        default:
-                            System.out.println("ERROR: Selecciona una opción del 1 al 5.");
-                            break;
-                        } 
-                    }while (selector!=5); 
+                    modoRapido();
                     break;
                 case 3:
                     configuracion();;
@@ -291,31 +245,30 @@ Función para generar letras aleatorias acorde a lo indicado
     }
 
     public static void EjercicioCalculadoraHumana() {
-
-        int cantidadOperaciones = 5;
-
         System.out.println("PRUEBA 3.3 LA CALCULADORA HUMANA");
 
         System.out.println("TURNO DEL JUGADOR 1");
-        double tiempoJugador1 = jugarCalculadoraHumana(cantidadOperaciones);
+        double tiempoJugador1 = jugarCalculadoraHumana();
 
         System.out.println("TURNO DEL JUGADOR 2");
-        double tiempoJugador2 = jugarCalculadoraHumana(cantidadOperaciones);
+        double tiempoJugador2 = jugarCalculadoraHumana();
 
         System.out.println("RESULTADOS FINALES");
         System.out.println("Tiempo final Jugador 1: " + tiempoJugador1 + " s");
         System.out.println("Tiempo final Jugador 2: " + tiempoJugador2 + " s");
 
         if (tiempoJugador1 < tiempoJugador2) {
+            pruebaJ1++;
             System.out.println("Ha ganado el Jugador 1 por ser mas rapido!");
         } else if (tiempoJugador2 < tiempoJugador1) {
+            pruebaJ2++;
             System.out.println("Ha ganado el Jugador 2 por ser mas rapido!");
         } else {
             System.out.println("Empate. Ambos jugadores obtuvieron el mismo tiempo.");
         }
     }
 
-    public static double jugarCalculadoraHumana(int cantidadOperaciones) {
+    public static double jugarCalculadoraHumana() {
 
         int numeroInicial1 = r.nextInt(100) + 1;
         int fallos = 0;
@@ -421,8 +374,9 @@ Función para generar letras aleatorias acorde a lo indicado
 
         System.out.println("Fallos: " + fallos + " | Tiempo final: " + tiempoFinal + " decimas");
         System.out.println("------------------------------");
-
-        return tiempoFinal;
+        
+        
+        return tiempoFinal ;
     }
 
     /*
@@ -485,6 +439,7 @@ Minijuego
             fin = Instant.now();
             duracion =  Duration.between(inicio, fin); 
             int duracionJugador1 = Math.toIntExact(duracion.toSeconds());
+            
 
             System.out.println("---Duraciones de los jugadores---");
             System.out.println("Jugador1: " + duracionJugador1 + " segundos");
@@ -543,6 +498,8 @@ Función que cifra la cadena de texto en función al desplazamiento otorgado
 
     public static void ganadorFinal() {
     System.out.println("---CONCURSO FINALIZADO---");
+    System.out.println("Puntos totales Jugador1: " + puntosGlobalJ1);
+    System.out.println("Puntos totales Jugador2: " + puntosGlobalJ2);
         if (puntosGlobalJ1 > puntosGlobalJ2) {
             System.out.println("Gana el JUGADOR1");
         } else if (puntosGlobalJ2 > puntosGlobalJ1) {
@@ -562,21 +519,29 @@ Función que cifra la cadena de texto en función al desplazamiento otorgado
             System.out.println("¿Que deseas modificar?");
             System.out.println("1. Repeticiones de las pruebas");
             System.out.println("2. Cantidad de letras(La Palabra más larga)");
-            System.out.println("2. Cantidad de operaciones(La Calculadora Humana)");
+            System.out.println("3. Cantidad de operaciones(La Calculadora Humana)");
             System.out.println("4. Salir");
             selectorConfig = sc.nextInt();
             sc.nextLine();
                 switch (selectorConfig) {
                 case 1:
                     System.out.println("Escriba a continuacion el numero de rondas por prueba que desea:");
-                    numRondas = sc.nextInt();
+                    do {
+                        numRondas = sc.nextInt();
+                    } while (numRondas<=0);
+                    
                     break;
                 case 2:
                     System.out.println("Escriba a la cantidad de letras extras para la prueba 'La Palabra más Larga':");
-                    cantidadLetras = sc.nextInt();
+                    do {
+                        cantidadLetras = sc.nextInt();
+                    } while (cantidadLetras<=0);
                     break;
                 case 3:
                     System.out.println("Escribe la cantidad de operaciones que desea realizar en 'La Calculadora Humana':");
+                    do {
+                        cantidadOperaciones = sc.nextInt();
+                    } while (cantidadOperaciones<=0);
                     break;
                 case 4:
                     System.out.println("SALIENDO...");
@@ -587,6 +552,56 @@ Función que cifra la cadena de texto en función al desplazamiento otorgado
                     break;
             }
         } while (selectorConfig!=4);
-            
+    }
+
+    public static void modoConcurso(){
+        System.out.println("---------------------------------");
+        System.out.println("---BIENVENIDO AL MODO CONCURSO---");
+        System.out.println("---------------------------------");
+        ejercicioLaCifraExacta();
+        puntuacionGlobal();
+        LaPalabraMasLarga();
+        puntuacionGlobal();
+        EjercicioCalculadoraHumana();
+        puntuacionGlobal();
+        cifradoCesar();
+        ganadorFinal();
+    }
+
+    public static void modoRapido(){
+        do {
+        System.out.println("-------------------------------");
+        System.out.println("---BIENVENIDO AL MODO RAPIDO---");
+        System.out.println("-------------------------------");
+        System.out.println("Selecciona la prueba que deas jugar");
+        System.out.println("1. La Cifra Exacta");
+        System.out.println("2. La Palabra Más Larga");
+        System.out.println("3. La Calculadora Humana");
+        System.out.println("4. Cifrado Cesar");
+        System.out.println("5. SALIR");
+        selector = sc.nextInt();
+        sc.nextLine();
+                    
+        switch (selector) {
+            case 1:
+                ejercicioLaCifraExacta();
+                break;
+             case 2:
+                LaPalabraMasLarga();
+                break;
+            case 3:
+                EjercicioCalculadoraHumana();
+                break;
+            case 4:
+                cifradoCesar();
+                break;
+            case 5:
+                System.out.println("SALIENDO DEL MODO RÁPIDO...");
+                break;        
+           default:
+                System.out.println("ERROR: Selecciona una opción del 1 al 5.");
+                break;
+                        } 
+        }while (selector!=5); 
     }
 }
